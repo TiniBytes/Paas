@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package role;
+
+option go_package = "./proto/role;role";
+
+// Role 角色对外暴露服务
+service Role {
+  rpc AddRole(RoleInfo) returns (Response) {}
+  rpc DeleteRole(RoleID) returns (Response) {}
+  rpc UpdateRole(RoleInfo) returns (Response) {}
+  rpc FindRoleByID(RoleID) returns(RoleInfo) {}
+  rpc FindAllRole(FindAll) returns (AllRole) {}
+
+  rpc AddPermission(RolePermission) returns(Response) {}
+  rpc DeletePermission(RolePermission) returns(Response) {}
+  rpc UpdatePermission(RolePermission) returns(Response) {}
+}
+
+// RoleInfo 角色信息
+message RoleInfo {
+  int64 id = 1;
+  string role_name = 2;
+  string role_status = 3;
+}
+
+// RoleID 角色ID
+message RoleID {
+  int64 id = 1;
+}
+
+// Response 响应
+message Response {
+  string msg = 1;
+}
+
+message FindAll {}
+
+// AllRole 所有角色信息
+message AllRole {
+  repeated RoleInfo role_info = 1;
+}
+
+// RolePermission 角色权限
+message RolePermission {
+  int64 role_id = 1;
+  repeated int64 permission_id = 2;
+}

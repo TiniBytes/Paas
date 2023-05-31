@@ -1,0 +1,66 @@
+syntax = "proto3";
+
+package user;
+
+option go_package = "./proto/user;user";
+
+// User 对外暴露服务
+service User {
+  rpc AddUser(UserInfo) returns (Response){}
+  rpc DeleteUser(UserID) returns (Response) {}
+  rpc UpdateUser(UserInfo) returns (Response) {}
+  rpc FindUserByID(UserID) returns (UserInfo) {}
+  rpc FindAllUser(FindAll) returns (AllUser) {}
+
+  rpc AddRole(UserRole) returns(Response) {}
+  rpc UpdateRole(UserRole) returns(Response) {}
+  rpc DeleteRole(UserRole) returns(Response) {}
+  rpc IsRight(UserRight) returns(Right) {}
+}
+
+// UserInfo 用户信息
+message UserInfo {
+  int64 id = 1;
+  string user_name = 2;
+  string user_email = 3;
+  bool is_admin = 4;
+  string user_pwd = 5;
+  int32 user_status = 6;
+}
+
+// UserID 用户ID
+message UserID {
+  int64 id = 1;
+}
+
+// UserRole 用户角色
+message UserRole {
+  int64 user_id = 1;
+  repeated int64 role_id = 2;
+}
+
+// UserRight 用户权限
+message UserRight {
+  int64 user_id = 1;
+  string action = 2;
+}
+
+// Right 权限
+message Right {
+  bool access = 1;
+}
+
+message FindAll {}
+
+// Response 响应
+message Response {
+  string msg = 1;
+}
+
+// AllUser 全部用户信息
+message AllUser {
+  repeated UserInfo user_info = 1;
+}
+
+
+

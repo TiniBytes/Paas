@@ -1,0 +1,99 @@
+syntax = "proto3";
+
+package appstore;
+
+option go_package = "./proto/appstore;appstore";
+
+// AppStore 应用市场对外API接口
+service AppStore {
+  rpc AddAppStore(AppStoreInfo) returns (Response) {}
+  rpc DeleteAppStore(AppStoreID) returns (Response) {}
+  rpc UpdateAppStore(AppStoreInfo) returns (Response) {}
+  rpc FindAppStoreByID(AppStoreID) returns (AppStoreInfo) {}
+  rpc FindAllAppStore(FindAll) returns (AllAppStore) {}
+
+  rpc AddInstallNum(AppStoreID) returns (Response) {}
+  rpc GetInstallNum(AppStoreID) returns (Number) {}
+  rpc AddViewNum(AppStoreID) returns (Response) {}
+  rpc GetViewNum(AppStoreID) returns (Number) {}
+}
+
+// AppStoreInfo 应用市场信息
+message AppStoreInfo {
+  int64 id = 1;
+  string app_sku = 2;
+  string app_title = 3;
+  string app_describe = 4;
+  string app_detail = 5;
+  float app_price = 6;
+  int64 app_install = 7;
+  int64 app_views = 8;
+  bool app_check = 9;
+  int64 app_category_id = 10;
+  int64 app_isv_id = 11;
+  repeated AppImage app_image = 12;
+  repeated AppPod app_pod = 13;
+  repeated AppMiddle app_middle = 14;
+  repeated AppVolume app_volume = 15;
+  repeated AppComment app_comment = 16;
+}
+
+// AppStoreID 应用市场ID
+message AppStoreID {
+  int64 id = 1;
+}
+
+// AppImage 应用市场图片
+message AppImage {
+  int64 app_id = 1;
+  string app_image_src = 2;
+}
+
+// AppPod 应用市场Pod
+message AppPod {
+  int64 app_id = 1;
+  int64 app_pod_id = 2;
+}
+
+// AppMiddle 应用市场中间件
+message AppMiddle {
+  int64 app_id = 1;
+  int64 app_middle_id = 2;
+}
+
+// AppVolume 应用市场存储
+message AppVolume {
+  int64 app_id = 1;
+  int64 app_volume_id = 2;
+}
+
+// AppComment 应用市场评论
+message AppComment {
+  int64 app_id = 1;
+  string app_comment_title = 2;
+  string app_comment_detail = 3;
+  int64 app_user_id = 4;
+}
+
+// Response 响应
+message Response {
+  string msg = 1;
+}
+
+// FindAll 查询所有
+message FindAll {}
+
+// AllAppStore 所有应用市场信息
+message AllAppStore {
+  repeated AppStoreInfo app_store_info = 1;
+}
+
+// Number 统计信息
+message Number {
+  int64 num = 1;
+}
+
+
+
+
+

@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package svcApi;
+
+option go_package = "./proto/svcApi;svcApi";
+
+// SvcApi rpc请求方法
+service SvcApi {
+  rpc AddSvc(Request) returns (Response) {}
+  rpc DeleteSvcByID(Request) returns (Response) {}
+  rpc UpdateSvc(Request) returns (Response) {}
+  rpc FindSvcByID(Request) returns (Response) {}
+  rpc Call(Request) returns (Response) {}
+}
+
+// Pair 队组
+message Pair {
+  string key = 1;
+  repeated string values = 2;
+}
+
+// Request rpc请求
+message Request {
+  string method = 1;
+  string path = 2;
+  map<string, Pair> header = 3;
+  map<string, Pair> get = 4;
+  map<string, Pair> post = 5;
+  string body = 6;
+  string url = 7;
+}
+
+// Response rpc响应
+message Response {
+  int32 statusCode = 1;
+  map<string, Pair> header = 2;
+  string body = 3;
+}
+

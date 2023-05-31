@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package appstoreApi;
+
+option go_package = "./proto/appstoreApi;appstoreApi";
+
+// AppStoreApi 应用市场API对外暴露服务
+service AppStoreApi {
+  rpc AddAppStore(Request) returns (Response) {}
+  rpc DeleteAppStore(Request) returns (Response) {}
+  rpc UpdateAppStore(Request) returns (Response) {}
+  rpc FindAppStoreByID(Request) returns (Response) {}
+  rpc Call(Request) returns (Response) {}
+
+  rpc AddInstallNum(Request) returns (Response) {}
+  rpc GetInstallNum(Request) returns (Response) {}
+  rpc AddViewNum(Request) returns (Response) {}
+  rpc GetViewNum(Request) returns (Response) {}
+}
+
+message Pair {
+  string key = 1;
+  repeated string values = 2;
+}
+
+message Request {
+  string method = 1;
+  string path = 2;
+  map<string, Pair> header = 3;
+  map<string, Pair> get = 4;
+  map<string, Pair> post = 5;
+  string body = 6;
+  string url = 7;
+}
+
+message Response {
+  int32 statusCode = 1;
+  map<string, Pair> header = 2;
+  string body = 3;
+}

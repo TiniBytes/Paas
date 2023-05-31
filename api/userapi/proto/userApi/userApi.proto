@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package userApi;
+
+option go_package = "./proto/userApi;userApi";
+
+// UserApi
+service UserApi {
+  rpc AddUser(Request) returns (Response) {}
+  rpc DeleteUser(Request) returns (Response) {}
+  rpc UpdateUser(Request) returns (Response) {}
+  rpc FindUserByID(Request) returns (Response) {}
+  rpc Call(Request) returns (Response) {}
+
+  rpc AddRole(Request) returns(Response) {}
+  rpc DeleteRole(Request) returns (Response) {}
+  rpc UpdateRole(Request) returns (Response) {}
+  rpc IsRight(Request) returns (Response) {}
+
+  rpc AddPermission(Request) returns (Response) {}
+  rpc DeletePermission(Request) returns (Response) {}
+  rpc UpdatePermission(Request) returns (Response) {}
+}
+
+message Pair {
+  string key = 1;
+  repeated string values = 2;
+}
+
+message Request {
+  string method = 1;
+  string path = 2;
+  map<string, Pair> header = 3;
+  map<string, Pair> get = 4;
+  map<string, Pair> post = 5;
+  string body = 6;
+  string url = 7;
+}
+
+message Response {
+  int32 statusCode = 1;
+  map<string, Pair> header = 2;
+  string body = 3;
+}

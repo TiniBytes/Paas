@@ -1,0 +1,5 @@
+{"level":"error","ts":"2023-05-31T09:44:56.221+0800","caller":"pod/pod.go:54","msg":"error loading source consul: source not found: /micro/consulConfig"}
+{"level":"error","ts":"2023-05-31T09:44:56.231+0800","caller":"pod/pod.go:64","msg":"dial tcp :0: connectex: The requested address is not valid in its context."}
+{"level":"error","ts":"2023-05-31T10:42:26.850+0800","caller":"svc/volume.go:54","msg":"error loading source consul: source not found: /micro/consulConfig"}
+{"level":"fatal","ts":"2023-05-31T10:57:40.147+0800","caller":"route/pod.go:165","msg":"Error 1050: Table 'route' already exists"}
+{"level":"error","ts":"2023-05-31T11:32:10.942+0800","caller":"svc/svc.go:54","msg":"error loading source consul: source not found: /micro/consulConfig"}

@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+package service;
+
+option go_package = "./proto/svc;svc";
+
+// 对外提供服务
+service Svc {
+  rpc AddSvc(SvcInfo) returns (Response) {}
+  rpc DeleteSvc(SvcID) returns (Response) {}
+  rpc UpdateSvc(SvcInfo) returns (Response) {}
+  rpc FindSvcByID(SvcID) returns (SvcInfo) {}
+  rpc FindAllSvc(FindAll) returns (AllSvc) {}
+}
+
+// Service 信息
+message SvcInfo {
+  int64 id = 1;
+  string svc_namespace = 2;
+  string svc_name = 3;
+  string svc_pod_name = 4;
+  string svc_type = 5;
+  string svc_external_name = 6;
+  string svc_team_id = 7;
+  repeated SvcPort svc_port = 8;
+}
+
+// ServicePort 服务端口信息
+message SvcPort {
+  int64 id = 1;
+  int64 svc_id = 2;
+  int32 svc_port = 3;
+  int32 svc_target_port = 4;
+  int32 svc_node_port = 5;
+  string svc_port_protocol = 6;
+}
+
+// 服务id
+message SvcID {
+  int64 id = 1;
+}
+
+// 查找全部service
+message FindAll {}
+
+// 回应
+message Response {
+  string msg = 1;
+}
+
+// 所有服务信息
+message AllSvc {
+  repeated SvcInfo svc_info = 1;
+}
+
